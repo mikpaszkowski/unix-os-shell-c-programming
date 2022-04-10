@@ -15,6 +15,7 @@ u_flag=false
 r_flag=false
 sed_mode=false
 SED_PATTERN=
+script_name="$(basename "$0")"
 
 usage() {
 
@@ -56,8 +57,16 @@ throw_error() {
 	exit
 }
 
+is_file_curr_script() {
+	if test "$script_name" = "$1"; then
+		throw_error "You cannot modify script name"
+	fi
+}
+
 #arg $1 - filename
 check_file() {
+
+	is_file_curr_script $1
 
 	#checking if the file/directory or sed pattern name were given
 	if [ -z $1 ]; then
@@ -164,6 +173,8 @@ if [[ -d $1 && $r_flag = false ]];
 fi
 
 while ! [ -z "$1" ]; do 
+
+	is_file_curr_script $1
 	
 	if [[ $r_flag = true ]];
 	then
