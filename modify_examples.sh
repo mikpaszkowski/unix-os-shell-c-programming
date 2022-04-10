@@ -326,3 +326,18 @@ print "then: should change all files in directories to uppercase"
 
     #cleaning
     rm -r test_1_dir_1/ test_2_dir_1/ test_3_dir_1/
+
+#***** test 17 *********
+print_test_name 17 "should not modify script name"
+
+print "given:"
+
+    ls -I modify_examples.sh 
+
+print "when:    bash modify.sh -u modify.sh"
+
+    bash modify.sh -u modify.sh
+
+print "then: script name should not be changed"
+
+    ls -I modify_examples.sh 
